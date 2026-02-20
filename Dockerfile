@@ -1,8 +1,8 @@
-FROM ubuntu:22.04
+FROM texlive/texlive:latest-full
 
-RUN apt-get update &&  \
+# 安装中文字体和 Python
+RUN apt-get update && \
     apt-get install -y \
-    texlive-full \
     fonts-noto-cjk \
     fonts-wqy-zenhei \
     fonts-wqy-microhei \
