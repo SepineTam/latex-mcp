@@ -1,4 +1,11 @@
 # latex-mcp
+
+[![Publish to PyPI](https://github.com/SepineTam/latex-mcp/actions/workflows/release-pypi.yml/badge.svg)](https://github.com/SepineTam/latex-mcp/actions/workflows/release-pypi.yml)
+[![Build and Push Docker Images](https://github.com/SepineTam/latex-mcp/actions/workflows/release-docker.yml/badge.svg)](https://github.com/SepineTam/latex-mcp/actions/workflows/release-docker.yml)
+[![PyPI version](https://img.shields.io/pypi/v/latex-mcp.svg)](https://pypi.org/project/latex-mcp/)
+[![License: AGPL 3.0](https://img.shields.io/badge/License-AGPL%203.0-blue.svg)](LICENSE)
+[![Issue](https://img.shields.io/badge/Issue-report-green.svg)](https://github.com/SepineTam/latex-mcp/issues/new)
+
 Enable AI agents to compile TeX files with LaTeX inside a Docker container.
 
 ## Quickly Start
