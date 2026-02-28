@@ -1,5 +1,7 @@
 # latex-mcp
 
+<!-- mcp-name: io.github.SepineTam/latex-mcp -->
+
 [![Publish to PyPI](https://github.com/SepineTam/latex-mcp/actions/workflows/release-pypi.yml/badge.svg)](https://github.com/SepineTam/latex-mcp/actions/workflows/release-pypi.yml)
 [![Build and Push Docker Images](https://github.com/SepineTam/latex-mcp/actions/workflows/release-docker.yml/badge.svg)](https://github.com/SepineTam/latex-mcp/actions/workflows/release-docker.yml)
 [![PyPI version](https://img.shields.io/pypi/v/latex-mcp.svg)](https://pypi.org/project/latex-mcp/)

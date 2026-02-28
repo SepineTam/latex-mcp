@@ -1,6 +1,6 @@
 [project]
 name = "latex-mcp"
-version = "0.1.2"
+version = "0.1.3"
 description = "Enable AI agents to compile TeX files with LaTeX inside a Docker container."
 readme = "README.md"
 authors = [
