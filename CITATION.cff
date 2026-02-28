@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Tan"
+    given-names: "Song"
+    orcid: "https://orcid.org/0009-0006-7449-1094"
+    email: "sepinetam@gmail.com"
+title: "LaTex-MCP: Enable AI agents to compile TeX files with LaTeX inside a Docker container."
+version: 0.1.0
+date-released: 2026-02-28
+url: "https://github.com/sepinetam/latex-mcp"
+repository-code: "https://github.com/sepinetam/latex-mcp"
+license: AGPL-3.0
