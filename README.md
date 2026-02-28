@@ -13,7 +13,7 @@ Enable AI agents to compile TeX files with LaTeX inside a Docker container.
 ### Prerequisites
 - [Docker](https://docs.docker.com/get-docker/)
 - Recommended hardware: 4GB or higher
-- Network access to GitHub Container Registry (ghcr.io)
+- Network access to [GitHub Container Registry](https://github.com/SepineTam/latex-mcp/pkgs/container/latex-mcp)
 
 ### Configuration in Claude Code
 
