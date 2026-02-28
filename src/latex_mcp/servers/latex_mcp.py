@@ -32,7 +32,7 @@ async def latex_compile(
     bibliography: Optional[str] = None,
     compile_times: int = 2,
     options: Optional[List[str]] = None,
-    clean_after: bool = False,
+    clean_after: bool = True,
 ) -> str:
     """
     Compile a TeX file to PDF using LaTeX.
