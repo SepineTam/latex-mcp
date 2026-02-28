@@ -25,7 +25,7 @@ latex_mcp = FastMCP(
     name="latex_compile",
 )
 async def latex_compile(
-    tex_file: str,
+    tex_file: str = "main.tex",
     mode: str = "auto",
     compiler: str = "pdflatex",
     working_dir: str = "/workspace",
