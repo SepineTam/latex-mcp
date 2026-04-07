@@ -7,10 +7,7 @@
 # @Email  : sepinetam@gmail.com
 # @File   : latex_mcp.py
 
-import asyncio
 import json
-import os
-from pathlib import Path
 from typing import List, Optional
 
 from mcp.server.fastmcp import FastMCP
@@ -142,61 +139,6 @@ async def latex_clean(
     }
 
     return json.dumps(response, indent=2, ensure_ascii=False)
-
-
-if os.getenv("LATEX_MCP__IS_BETA", "").lower() == "true":
-    @latex_mcp.tool(
-        name="latex_run_script",
-    )
-    async def latex_run_script(script_path: str) -> str:
-        """
-        Run a custom script file in beta mode.
-
-        Args:
-            script_path: Path to the script file.
-
-        Returns:
-            JSON string with success status, exit_code, stdout, stderr, and script_path.
-        """
-        resolved_path = Path(script_path).expanduser().resolve()
-        if not resolved_path.exists():
-            return json.dumps({
-                "success": False,
-                "error": f"Script file does not exist: {resolved_path}",
-                "script_path": str(resolved_path),
-            }, indent=2, ensure_ascii=False)
-
-        if not resolved_path.is_file():
-            return json.dumps({
-                "success": False,
-                "error": f"Script path is not a file: {resolved_path}",
-                "script_path": str(resolved_path),
-            }, indent=2, ensure_ascii=False)
-
-        if not os.access(resolved_path, os.X_OK):
-            return json.dumps({
-                "success": False,
-                "error": f"Script file is not executable: {resolved_path}",
-                "script_path": str(resolved_path),
-            }, indent=2, ensure_ascii=False)
-
-        process = await asyncio.create_subprocess_exec(
-            str(resolved_path),
-            cwd="/workspace",
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-        )
-        stdout, stderr = await process.communicate()
-
-        response = {
-            "success": process.returncode == 0,
-            "exit_code": process.returncode,
-            "stdout": stdout.decode("utf-8", errors="replace"),
-            "stderr": stderr.decode("utf-8", errors="replace"),
-            "script_path": str(resolved_path),
-        }
-
-        return json.dumps(response, indent=2, ensure_ascii=False)
 
 
 if __name__ == "__main__":

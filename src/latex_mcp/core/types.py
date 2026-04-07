@@ -8,9 +8,19 @@
 # @File   : types.py
 
 from enum import Enum
+from pathlib import Path
 from typing import List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+BLOCKED_OPTIONS = {
+    "-shell-escape", "--shell-escape",
+    "-enable-write18", "--enable-write18",
+    "-write18",
+    "-aux-directory",
+}
+
+WORKSPACE_ROOT = Path("/workspace").resolve()
 
 
 class CompilerType(str, Enum):
@@ -69,6 +79,34 @@ class CompileInput(BaseModel):
         description="Whether to clean auxiliary files after compilation",
     )
 
+    @field_validator("options")
+    @classmethod
+    def validate_options(cls, v: List[str]) -> List[str]:
+        for opt in v:
+            opt_lower = opt.lower().strip()
+            for blocked in BLOCKED_OPTIONS:
+                if blocked in opt_lower:
+                    raise ValueError(f"Option not allowed: {opt}")
+        return v
+
+    @field_validator("working_dir")
+    @classmethod
+    def validate_working_dir(cls, v: str) -> str:
+        resolved = Path(v).resolve()
+        if resolved != WORKSPACE_ROOT and not str(resolved).startswith(f"{WORKSPACE_ROOT}/"):
+            raise ValueError("working_dir must be within /workspace")
+        return v
+
+    @field_validator("tex_file")
+    @classmethod
+    def validate_tex_file(cls, v: str) -> str:
+        p = Path(v)
+        if p.is_absolute():
+            raise ValueError("tex_file must be a relative path")
+        if ".." in p.parts:
+            raise ValueError("tex_file must not contain '..' path traversal")
+        return v
+
 
 class CompileResult(BaseModel):
     """Result of LaTeX compilation."""
@@ -113,6 +151,14 @@ class CleanInput(BaseModel):
         default=None,
         description="Specific .tex file to clean auxiliary files for. If None, cleans all",
     )
+
+    @field_validator("working_dir")
+    @classmethod
+    def validate_working_dir(cls, v: str) -> str:
+        resolved = Path(v).resolve()
+        if resolved != WORKSPACE_ROOT and not str(resolved).startswith(f"{WORKSPACE_ROOT}/"):
+            raise ValueError("working_dir must be within /workspace")
+        return v
 
 
 class CleanResult(BaseModel):
